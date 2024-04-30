@@ -1,7 +1,11 @@
-import crawler.CrawlerBase;
+package crawler;
+
+import crawler.base.CrawlerBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
 
 public class CoupangCrawler extends CrawlerBase{
 
@@ -11,7 +15,8 @@ public class CoupangCrawler extends CrawlerBase{
     private WebDriver webDriver = super.getWebDriver();
     private WebElement element;
 
-    public void activate(){
+    public ArrayList<String> activate(){
+        ArrayList<String> results = new ArrayList<>();
         try{
             webDriver.get(super.getURL());
             Thread.sleep(2000);
@@ -40,11 +45,17 @@ public class CoupangCrawler extends CrawlerBase{
             System.out.println(director);
             System.out.println(writer);
 
+            results.add(description);
+            results.add(actor);
+            results.add(director);
+            results.add(actor);
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         finally{
             webDriver.close();
         }
+        return results;
     }
 }

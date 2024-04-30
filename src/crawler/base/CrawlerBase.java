@@ -1,4 +1,4 @@
-package crawler;
+package crawler.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +12,7 @@ public class CrawlerBase {
      * 웹 드라이버 설정
      */
     private String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    private String WEB_DRIVER_PATH = "util/chromedriver/chromedriver.exe";
+    private String WEB_DRIVER_PATH = "util/driver/chromedriver.exe";
 
     /**
      * 크롤러 기본 옵션 세팅
