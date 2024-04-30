@@ -7,6 +7,9 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
+        /**
+         * 크롤링할 URL
+         */
         String URL = "https://www.coupangplay.com/content/a37abef6-2043-40e4-ab89-d11ae2f04b6e";
         CoupangCrawler coupangCrawler = new CoupangCrawler(URL);
 

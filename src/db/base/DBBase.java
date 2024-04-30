@@ -7,37 +7,22 @@ public class DBBase {
     private String url = "jdbc:mysql://gguip7554.cafe24.com:3306/gguip7554?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8";
     private String user = "gguip7554";
     private String password = "p7554!potato";
-    private Connection con = null;
-    private ResultSet rs = null;
-    private PreparedStatement psmt = null;
-    public Connection getCon() {
-        return con;
+    private Connection connection = null;
+    private PreparedStatement statement = null;
+    public Connection getConnection() {
+        return connection;
     }
-
-    public void setCon(Connection con) {
-        this.con = con;
+    public PreparedStatement getStatement() {
+        return statement;
     }
-
-    public ResultSet getRs() {
-        return rs;
-    }
-
-    public void setRs(ResultSet rs) {
-        this.rs = rs;
-    }
-
-    public PreparedStatement getPsmt() {
-        return psmt;
-    }
-
-    public void setPsmt(PreparedStatement psmt) {
-        this.psmt = psmt;
+    public void setStatement(PreparedStatement statement) {
+        this.statement = statement;
     }
     public DBBase(){
         try {
             Class.forName(driver);
             try {
-                con = DriverManager.getConnection(url,user,password);
+                connection = DriverManager.getConnection(url,user,password);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
