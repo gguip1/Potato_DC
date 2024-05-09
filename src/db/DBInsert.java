@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DBInsert extends DBBase {
 
     /**
-     * MovieTest 테이블 INSERT 메소드 테스트용
+     *
      * @param title
      * @param img
      * @param description
@@ -16,11 +16,11 @@ public class DBInsert extends DBBase {
      * @param actor
      * @throws SQLException
      */
-    public void MovieTestInsert(String title, String img, String description, String director, String actor) throws SQLException {
+    public void contentInsert(String title, String img, String description, String director, String actor, String tableName) throws SQLException {
         /**
          * INSERT SQL
          */
-        String sql = "INSERT INTO movie_test(title, img, description, director, actor)" +
+        String sql = "INSERT INTO " + tableName + "(title, img, description, director, actor)" +
                 "VALUES (?,?,?,?,?)";
 
         super.setStatement(super.getConnection().prepareStatement(sql));
@@ -35,6 +35,26 @@ public class DBInsert extends DBBase {
         state.setString(3, description);
         state.setString(4, director);
         state.setString(5, actor);
+
+        state.executeUpdate();
+    }
+
+    /**
+     *
+     * @param id
+     * @param genre_id
+     * @param tableName
+     * @throws SQLException
+     */
+    public void genreInsert(int id, int genre_id, String tableName) throws SQLException {
+        String sql = "INSERT INTO " + tableName + "(id, genre_id)" +
+                "VALUES (?,?)";
+
+        super.setStatement(super.getConnection().prepareStatement(sql));
+        PreparedStatement state = super.getStatement();
+
+        state.setInt(1, id);
+        state.setInt(2, genre_id);
 
         state.executeUpdate();
     }

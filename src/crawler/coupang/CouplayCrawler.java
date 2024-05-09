@@ -1,11 +1,11 @@
-package crawler;
+package crawler.coupang;
 
-import org.checkerframework.checker.units.qual.A;
+import crawler.Content;
+import crawler.ContentGenre;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
