@@ -1,21 +1,13 @@
 package crawler;
 
+import java.util.ArrayList;
+
 public class Content {
     private String title;
     private String img;
     private String description;
     private String director;
     private String actor;
-
-    public String getWriter() {
-        return writer;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
-
-    private String writer;
 
     public String getTitle() {
         return title;

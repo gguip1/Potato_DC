@@ -146,6 +146,7 @@ public class CouplayCrawler {
         ArrayList<String> links = new ArrayList<>();
 
         element = webDriver.findElements(By.className(linkClassName));
+        System.out.println(element);
 //        element = webDriver.findElements(By.className("OpenTop20Carousel_clipsItemWrapper__PS3gO"));
         for(int index = 0; index < element.size(); index++){
             links.add(element.get(index).getAttribute("href"));
@@ -160,11 +161,11 @@ public class CouplayCrawler {
         for(int index = 0; index < title.size(); index++){
             Content content = new Content();
 
-            content.setTitle(title.get(index));
-            content.setDescription(description.get(index));
-            content.setImg(img.get(index));
-            content.setDirector(director.get(index));
-            content.setActor(actor.get(index));
+//            content.setTitle(title.get(index));
+//            content.setDescription(description.get(index));
+//            content.setImg(img.get(index));
+//            content.setDirector(director.get(index));
+//            content.setActor(actor.get(index));
 
             output.add(content);
         }
@@ -178,7 +179,7 @@ public class CouplayCrawler {
         for(int index = 0; index < genre.size(); index++){
             ContentGenre contentGenre = new ContentGenre();
 
-            contentGenre.setGenre(genre.get(index));
+//            contentGenre.setGenre(genre.get(index));
 
             output.add(contentGenre);
         }

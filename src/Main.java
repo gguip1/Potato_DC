@@ -1,11 +1,13 @@
-import crawler.coupang.CouplayCrawler;
-import crawler.*;
-import crawler.naverWebtoon.NaverWebtoon;
+import crawler.Content;
+import crawler.ContentGenre;
+import crawler.coupang.CPCrawler;
+import crawler.naverWebtoon.NWCrawler;
 import db.DBInsert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -22,50 +24,27 @@ public class Main {
 
         WebDriver webDriver = new ChromeDriver(options);
 
-//        String coupang_URL = "https://www.coupangplay.com/catalog";
-//
-//        CouplayCrawler couplayCrawler = new CouplayCrawler(webDriver, coupang_URL);
-//
-//        Object[] couplay = couplayCrawler.scrapCouplay(
-//                "OpenFeedCarousel_clipsThumbnail__Ixioy"
-//                ,"OpenFeedCarousel_clipsItemWrapper__1FNyR",
-//                "__react-ellipsis-js-content",
-//                "OpenTitleHeroSection_heroTagName__dZeHv",
-//                "OpenTitleHeroSection_heroTagDetails__O5T5N"
-//        ); //coupang ClassName
-//
-//        ArrayList<Content> couplayContent = (ArrayList<Content>) couplay[0];
-//        ArrayList<ContentGenre> couplayGenre = (ArrayList<ContentGenre>) couplay[1];
-//
-//        DBInsert dbInsert = new DBInsert();
-//
-//        for(int index = 0; index < couplayContent.size(); index++){
-//            String title = couplayContent.get(index).getTitle().replace("[","").replace("]", "");
-//            String description =  couplayContent.get(index).getDescription().replace("[","").replace("]", "");
-//            String img = couplayContent.get(index).getImg().replace("[","").replace("]", "");
-//            String actor = couplayContent.get(index).getActor().replace("[","").replace("]", "");
-//            String director = couplayContent.get(index).getDirector().replace("[","").replace("]", "");
-//            System.out.println("index : " + index);
-//            System.out.println("title : " + title);
-//            System.out.println("description : " + description);
-//            System.out.println("img : " + img);
-//            System.out.println("actor : " + actor);
-//            System.out.println("director : " + director);
-//            dbInsert.contentInsert(title, img, description, director, actor, "movie_test");
-//        }
+        String coupang_URL = "https://www.coupangplay.com/catalog";
+        CPCrawler cpCrawler = new CPCrawler(webDriver, coupang_URL);
+        Object[] cpResult = cpCrawler.getResult();
+        ArrayList<Content> cpContents = (ArrayList<Content>) cpResult[0];
+        System.out.println(cpResult);
+
 
         String naverWebtoon_URL = "https://comic.naver.com/webtoon";
+        NWCrawler nwCrawler = new NWCrawler(webDriver, naverWebtoon_URL);
+        Object[] nwResult = nwCrawler.getResult();
+        ArrayList<Content> nwContents = (ArrayList<Content>) nwResult[0];
+        ArrayList<ContentGenre> nwGenres = (ArrayList<ContentGenre>) nwResult[1];
+        System.out.println(nwResult);
 
-        NaverWebtoon naverWebtoon = new NaverWebtoon(webDriver, naverWebtoon_URL);
+        DBInsert dbInsert = new DBInsert();
+        for(int index = 0; index < cpContents.size(); index++){
+            dbInsert.contentInsert(cpContents.get(index).getTitle(), cpContents.get(index).getImg(), cpContents.get(index).getDescription(), cpContents.get(index).getDirector(), cpContents.get(index).getActor(), "movie_test");
+        }
 
-        Object[] naverWeb = naverWebtoon.scrapCouplay(
-                "Poster__image--d9XTI",
-                "Poster__link--sopnC",
-                "EpisodeListInfo__summary--Jd1WG",
-                "ContentMetaInfo__profile--b6niL",
-                "TagGroup__tag--xu0OH"
-        );
-
-        System.out.println(naverWeb);
+        for(int index = 0; index < nwContents.size(); index++){
+            dbInsert.contentInsert(nwContents.get(index).getTitle(), nwContents.get(index).getImg(), nwContents.get(index).getDescription(), nwContents.get(index).getDirector(), nwContents.get(index).getActor(), "movie_test");
+        }
     }
 }

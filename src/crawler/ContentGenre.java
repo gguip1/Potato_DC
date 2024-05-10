@@ -1,13 +1,15 @@
 package crawler;
 
-public class ContentGenre {
-    private String genre;
+import java.util.ArrayList;
 
-    public String getGenre() {
+public class ContentGenre {
+    private ArrayList<String> genre;
+
+    public ArrayList<String> getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(ArrayList<String> genre) {
         this.genre = genre;
     }
 }
