@@ -52,10 +52,16 @@ public class CPCrawler implements Crawler {
 
             }
 
-            System.out.println(links.size());
-            System.out.println(titles.size());
-            System.out.println(descriptions.size());
-            System.out.println(metaInfo.size());
+            for(int index = 0; index < metaInfo.size(); index++){
+                ArrayList<String> genre = new ArrayList<>();
+                genre.add(metaInfo.get(index).get("genre"));
+                genres.add(genre);
+            }
+
+//            System.out.println(links.size());
+//            System.out.println(titles.size());
+//            System.out.println(descriptions.size());
+//            System.out.println(metaInfo.size());
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -72,7 +78,7 @@ public class CPCrawler implements Crawler {
         return results;
     }
 
-    private Object setContents(ArrayList<String> titles, ArrayList<String> imgs, ArrayList<ArrayList<String>> descriptions, ArrayList<HashMap<String, String>> metaInfo) {
+    private ArrayList<Content> setContents(ArrayList<String> titles, ArrayList<String> imgs, ArrayList<ArrayList<String>> descriptions, ArrayList<HashMap<String, String>> metaInfo) {
         ArrayList<Content> contents = new ArrayList<>();
 
         for(int index = 0; index < titles.size(); index++){
@@ -94,7 +100,7 @@ public class CPCrawler implements Crawler {
         return contents;
     }
 
-    private Object setGenres(ArrayList<ArrayList<String>> genres) {
+    private ArrayList<ContentGenre> setGenres(ArrayList<ArrayList<String>> genres) {
         ArrayList<ContentGenre> contentGenres = new ArrayList<>();
 
         for(int index = 0; index < genres.size(); index++){
@@ -105,7 +111,7 @@ public class CPCrawler implements Crawler {
             contentGenres.add(contentGenre);
         }
 
-        return  contentGenres;
+        return contentGenres;
     }
 
     private ArrayList<String> getLinks(){

@@ -3,7 +3,9 @@ package db;
 import db.base.DBBase;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class DBInsert extends DBBase {
 
@@ -58,4 +60,44 @@ public class DBInsert extends DBBase {
 
         state.executeUpdate();
     }
+
+    private HashMap<String, Integer> allGenreID() throws SQLException {
+//        String sql = "SELECT genre_id FROM genre where genre_name=" + "\"" + genre_name + "\"";
+        String sql = "SELECT * FROM genre";
+        HashMap<String, Integer> result = new HashMap<>();
+
+        super.setStatement(super.getConnection().prepareStatement(sql));
+        PreparedStatement state = super.getStatement();
+        ResultSet rs = state.executeQuery();
+
+        while(rs.next()){
+            result.put(rs.getString(2), rs.getInt(1));
+        }
+
+        return result;
+    }
+
+    public Integer searchGenreID(String genre) throws SQLException {
+        HashMap<String, Integer> genreID = allGenreID();
+
+        return genreID.get(genre);
+    }
+
+    public int searchMovieID(String tableName, String content_name) throws SQLException {
+        String sql = "SELECT id FROM " + tableName + " where title=" + "\"" + content_name + "\"";
+//        String sql = "SELECT id FROM movie_test";
+
+        super.setStatement(super.getConnection().prepareStatement(sql));
+        PreparedStatement state = super.getStatement();
+        ResultSet rs = state.executeQuery();
+
+        int movie_id = 0;
+
+        while(rs.next()){
+            movie_id = rs.getInt(1);
+        }
+
+        return movie_id;
+    }
 }
+

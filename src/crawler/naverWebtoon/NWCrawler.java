@@ -49,17 +49,17 @@ public class NWCrawler implements Crawler {
                 metaInfo.add(getMetaInfo());
                 genres.add(getGenres());
 
-                System.out.println("---------------------------------");
-                System.out.println("제목 : " + titles.get(link_index));
-                System.out.println("설명 : " + descriptions.get(link_index));
-                if(imgs.get(link_index).size() != 0){
-                    System.out.println("이미지 : " + imgs.get(link_index).get(0));
-                }
-                else{
-                    System.out.println("이미지 : " + imgs.get(link_index));
-                }
-                System.out.println("메타 정보 : " + metaInfo.get(link_index));
-                System.out.println("장르 : " + genres.get(link_index));
+//                System.out.println("---------------------------------");
+//                System.out.println("제목 : " + titles.get(link_index));
+//                System.out.println("설명 : " + descriptions.get(link_index));
+//                if(imgs.get(link_index).size() != 0){
+//                    System.out.println("이미지 : " + imgs.get(link_index).get(0));
+//                }
+//                else{
+//                    System.out.println("이미지 : " + imgs.get(link_index));
+//                }
+//                System.out.println("메타 정보 : " + metaInfo.get(link_index));
+//                System.out.println("장르 : " + genres.get(link_index));
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -67,11 +67,11 @@ public class NWCrawler implements Crawler {
 //            webDriver.close();
         }
 
-        System.out.println(titles.size());
-        System.out.println(imgs.size());
-        System.out.println(descriptions.size());
-        System.out.println(metaInfo.size());
-        System.out.println(genres.size());
+//        System.out.println(titles.size());
+//        System.out.println(imgs.size());
+//        System.out.println(descriptions.size());
+//        System.out.println(metaInfo.size());
+//        System.out.println(genres.size());
 
         Object[] results = new Object[2];
 
