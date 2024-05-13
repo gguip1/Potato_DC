@@ -18,12 +18,12 @@ public class DBInsert extends DBBase {
      * @param actor
      * @throws SQLException
      */
-    public void contentInsert(String title, String img, String description, String director, String actor, String tableName) throws SQLException {
+    public void contentInsert(String title, String img, String description, String director, String actor, String url, String tableName) throws SQLException {
         /**
          * INSERT SQL
          */
-        String sql = "INSERT INTO " + tableName + "(title, img, description, director, actor)" +
-                "VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO " + tableName + "(title, img, description, director, actor, url)" +
+                "VALUES (?,?,?,?,?,?)";
 
         super.setStatement(super.getConnection().prepareStatement(sql));
         PreparedStatement state = super.getStatement();
@@ -37,6 +37,7 @@ public class DBInsert extends DBBase {
         state.setString(3, description);
         state.setString(4, director);
         state.setString(5, actor);
+        state.setString(6, url);
 
         state.executeUpdate();
     }
