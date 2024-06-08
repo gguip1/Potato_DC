@@ -31,7 +31,7 @@ public class KPCrawler {
             webDriver.get(URL);
             Thread.sleep(200);
 
-            for(int i = 0; i < 100; i++){
+            for(int i = 0; i < 2500; i++){
                 new Actions(webDriver).sendKeys(Keys.END).perform();
 
                 Thread.sleep(100);
