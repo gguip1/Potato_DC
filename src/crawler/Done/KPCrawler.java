@@ -49,13 +49,21 @@ public class KPCrawler {
                 webDriver.get(links.get(link_index));
                 Thread.sleep(300);
 
+                try{
+                    WebElement button = webDriver.findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/button"));
+                    button.click();
+                }catch (Exception e){
+                    System.out.println(" : ");
+                }
+
                 String title = getTitle();
                 String genre = getGenre();
                 String director = getDirector();
                 String img = getImg();
+                String description = getDescription();
 
                 try{
-                    dbInsert.contentInsert(title, img, null, director, null, links.get(link_index),"kpnovel");
+                    dbInsert.contentInsert(title, img, description, director, null, links.get(link_index),"kpnovel");
                     dbInsert.genreInsert(dbInsert.searchMovieID("kpnovel", title), dbInsert.searchGenreID(genre), "kpnovel_genre");
 
                     System.out.println("Done...");
@@ -65,9 +73,7 @@ public class KPCrawler {
 
             }
 
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
+        } catch (InterruptedException | SQLException e) {
             throw new RuntimeException(e);
         } finally {
             webDriver.close();
@@ -148,5 +154,22 @@ public class KPCrawler {
         }
 
         return director;
+    }
+
+    private String getDescription() throws InterruptedException {
+        String description = null;
+
+        WebElement button = webDriver.findElement(By.xpath("//*[@id=\"__next\"]/div/div[2]/div[1]/div[2]/div[1]/div/div/div[2]/a/div"));
+        button.click();
+
+        Thread.sleep(1500);
+
+        element = webDriver.findElements(By.xpath("//*[@id=\"__next\"]/div/div[2]/div[1]/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div/span"));
+
+        for (WebElement webElement : element) {
+            description = webElement.getText();
+        }
+
+        return description;
     }
 }
